@@ -22,3 +22,8 @@ Thumbs.db
 
 # Python caches
 .pytest_cache/
+
+# Dataset
+backend/data/raw/
+backend/data/processed/
+backend/data/
