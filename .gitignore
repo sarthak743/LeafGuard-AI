@@ -27,3 +27,9 @@ Thumbs.db
 backend/data/raw/
 backend/data/processed/
 backend/data/
+
+# Trained models
+backend/models/*.pth
+
+# Evaluation outputs
+backend/outputs/
