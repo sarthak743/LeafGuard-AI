@@ -91,7 +91,7 @@ def save_checkpoint(model):
 
     torch.save(model.state_dict(), MODEL_PATH)
 
-    print(f"\n✅ Model saved to:\n{MODEL_PATH}")
+    print(f"\nModel saved to:\n{MODEL_PATH}")
 
 
 # ==========================================================
@@ -120,7 +120,7 @@ def load_checkpoint(model, device):
         )
     )
 
-    print(f"\n✅ Loaded model from:\n{MODEL_PATH}")
+    print(f"\nLoaded model from:\n{MODEL_PATH}")
 
     return model
 

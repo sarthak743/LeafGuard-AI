@@ -198,7 +198,7 @@ def main():
 
     patience_counter = 0
     
-    print("\nStarting Training...\n")
+    print("\nStarting Training\n")
 
     for epoch in range(EPOCHS):
 
