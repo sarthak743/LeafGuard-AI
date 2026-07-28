@@ -19,7 +19,7 @@ from torchvision.models import (
     EfficientNet_B0_Weights
 )
 
-from config import NUM_CLASSES
+from ml.config import NUM_CLASSES
 
 
 # ==========================================================

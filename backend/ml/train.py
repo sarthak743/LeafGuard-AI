@@ -11,16 +11,16 @@ from torch.optim import Adam
 from tqdm import tqdm
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 
-from dataset import get_dataloaders
-from model import build_model, get_device
-from utils import (
+from ml.dataset import get_dataloaders
+from ml.model import build_model, get_device
+from ml.utils import (
     set_seed,
     calculate_accuracy,
     save_checkpoint,
     count_trainable_parameters
 )
 
-from config import (
+from ml.config import (
     LEARNING_RATE,
     EPOCHS,
     WEIGHT_DECAY,

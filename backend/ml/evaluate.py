@@ -20,11 +20,11 @@ from sklearn.metrics import (
     f1_score
 )
 
-from dataset import get_dataloaders
-from model import build_model, get_device
-from utils import load_checkpoint
+from ml.dataset import get_dataloaders
+from ml.model import build_model, get_device
+from ml.utils import load_checkpoint
 
-from config import (
+from ml.config import (
     METRICS_DIR,
     PLOTS_DIR
 )
@@ -58,7 +58,7 @@ def main():
     all_predictions = []
     all_labels = []
 
-    print("\nEvaluating Model...\n")
+    print("\nEvaluating Model\n")
 
     # Disable gradient calculations
     with torch.no_grad():

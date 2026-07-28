@@ -94,7 +94,7 @@ def main():
     total_val = 0
     total_test = 0
 
-    print("Splitting dataset...\n")
+    print("Splitting dataset\n")
 
     for class_folder in tqdm(class_folders):
 
@@ -154,10 +154,10 @@ def main():
     print(f"Testing Images     : {total_test}")
 
     print("\nGenerated:")
-    print("✓ processed/train")
-    print("✓ processed/val")
-    print("✓ processed/test")
-    print("✓ class_names.json")
+    print("processed/train")
+    print("processed/val")
+    print("processed/test")
+    print("class_names.json")
 
 
 if __name__ == "__main__":

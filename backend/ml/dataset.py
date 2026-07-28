@@ -8,7 +8,7 @@ from torchvision import datasets, transforms
 # Configuration
 # ==========================================================
 
-from config import IMAGE_SIZE, BATCH_SIZE, NUM_WORKERS
+from ml.config import IMAGE_SIZE, BATCH_SIZE, NUM_WORKERS
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data" / "processed"

@@ -13,7 +13,7 @@ import random
 import numpy as np
 import torch
 
-from config import MODEL_PATH, RANDOM_SEED
+from ml.config import MODEL_PATH, RANDOM_SEED
 
 
 # ==========================================================
