@@ -33,3 +33,6 @@ backend/models/*.pth
 
 # Evaluation outputs
 backend/outputs/
+
+#kept files needed to me
+needed
