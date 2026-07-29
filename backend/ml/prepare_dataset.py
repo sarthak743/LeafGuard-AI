@@ -83,7 +83,11 @@ def main():
         [folder for folder in RAW_DIR.iterdir() if folder.is_dir()]
     )
 
-    class_names = [folder.name for folder in class_folders]
+    # Sort by string name (case-sensitive) to match PyTorch
+    # ImageFolder's class ordering exactly.
+    # Note: sorted(Path) is case-insensitive on Windows,
+    # which differs from ImageFolder's sorted(str).
+    class_names = sorted([folder.name for folder in class_folders])
 
     with open(CLASS_JSON, "w") as f:
         json.dump(class_names, f, indent=4)

@@ -7,6 +7,7 @@ Entry point of the LeafGuard FastAPI application.
 from fastapi import FastAPI
 
 from app.routes.predict import router as predict_router
+from app.routes.weather import router as weather_router
 
 
 app = FastAPI(
@@ -31,3 +32,5 @@ def root():
 app.include_router(
     predict_router
 )
+
+app.include_router(weather_router)

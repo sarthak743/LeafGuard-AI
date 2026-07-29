@@ -94,7 +94,7 @@ def build_model():
 
         # Final classification layer
         nn.Linear(
-            model.classifier[1].in_features,
+            in_features,
             NUM_CLASSES
         )
 

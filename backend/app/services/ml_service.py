@@ -5,7 +5,6 @@ Handles model loading and prediction.
 """
 import json
 import torch
-from torchvision import transforms
 
 from ml.model import (
     build_model,
@@ -85,7 +84,7 @@ def predict(image_tensor):
 
         predictions.append(
             {
-                "disease": class_names[index.item()],
+                "class_name": class_names[index.item()],
                 "confidence": round(
                     probability.item() * 100,
                     2   
@@ -94,3 +93,4 @@ def predict(image_tensor):
         )
 
     return predictions
+

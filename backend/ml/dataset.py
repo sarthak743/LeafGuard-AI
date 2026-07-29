@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
@@ -8,14 +6,14 @@ from torchvision import datasets, transforms
 # Configuration
 # ==========================================================
 
-from ml.config import IMAGE_SIZE, BATCH_SIZE, NUM_WORKERS
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data" / "processed"
-
-TRAIN_DIR = DATA_DIR / "train"
-VAL_DIR = DATA_DIR / "val"
-TEST_DIR = DATA_DIR / "test"
+from ml.config import (
+    IMAGE_SIZE,
+    BATCH_SIZE,
+    NUM_WORKERS,
+    TRAIN_DIR,
+    VAL_DIR,
+    TEST_DIR
+)
 
 # ==========================================================
 # Image Transformations
