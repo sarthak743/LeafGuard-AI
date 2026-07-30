@@ -1,38 +1,57 @@
-# Python
-backend/venv/
+# Python Caches & Bytecode
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# Node
-frontend/node_modules/
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+backend/venv/
 
-# Environment
+# Environment Variables & Secrets
 .env
 *.env
+.env.*
 
-# OS
+# IDE & Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Specific Files
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# Logs
+# Log Files
 *.log
+logs/
 
-# VS Code
-.vscode/
+# Node / Frontend Dependencies & Builds
+frontend/node_modules/
+frontend/dist/
+frontend/build/
 
-# Python caches
-.pytest_cache/
-
-# Dataset
+# Dataset Folders (Ignores heavy raw/processed image folders, preserves class_names.json)
 backend/data/raw/
 backend/data/processed/
-backend/data/
-
-# Trained models
+    
+# Model Weights & Artifacts
 backend/models/*.pth
+backend/models/*.pt
 
-# Evaluation outputs
+# Training & Evaluation Output Logs/Plots
 backend/outputs/
 
-#kept files needed to me
+# Custom Local Folders
 needed
+
+#frontend
+leafguard/node_modules

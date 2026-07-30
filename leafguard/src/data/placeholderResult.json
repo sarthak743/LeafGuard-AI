@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "confidence": 100,
+  "prediction": {
+    "class_name": "Peach___Bacterial_spot",
+    "display_name": "Bacterial Spot",
+    "confidence": 100,
+    "details": {
+      "display_name": "Bacterial Spot",
+      "plant": "Peach",
+      "severity": "Medium",
+      "description": "Bacterial spot is a damaging disease of peaches that affects leaves, twigs, and fruit. It often leads to severe defoliation, which weakens the tree and reduces the size and quality of the fruit. The bacteria are easily spread by wind-driven rain during warm weather.",
+      "symptoms": [
+        "Small, water-soaked, angular spots on leaves that turn deep purple to black",
+        "Centers of leaf spots drop out, leaving a 'shot-hole' appearance",
+        "Deep, pitted, dark lesions on the skin of the fruit",
+        "Yellowing and severe dropping of infected leaves"
+      ],
+      "causes": [
+        "Bacteria overwintering in twig cankers and buds",
+        "Splashing rain and high winds spreading bacteria to new growth",
+        "Warm temperatures combined with high surface moisture"
+      ],
+      "treatment": [
+        "Apply copper-based bactericides during early spring/bud break",
+        "Apply oxytetracycline or other labeled bactericides during the growing season if pressure is high",
+        "Maintain optimal tree nutrition to help trees withstand defoliation stress"
+      ],
+      "prevention": [
+        "Plant peach varieties that are highly resistant to bacterial spot",
+        "Prune out visible twig cankers during the dormant season",
+        "Plant windbreaks around the orchard to reduce wind-driven rain spread",
+        "Ensure good airflow through the canopy via proper pruning"
+      ],
+      "recommended_action": "Apply a labeled copper or antibiotic spray, and ensure proper orchard airflow.",
+      "weather_conditions": {
+        "temperature_range": { "min": 22, "max": 30 },
+        "high_humidity": true,
+        "rain_required": true
+      }
+    }
+  },
+  "weather": {
+    "location": "Tomenaryq",
+    "temperature": 31.17,
+    "humidity": 22,
+    "rain": false
+  },
+  "weather_advisory": {
+    "risk": "Low",
+    "score": 0,
+    "message": "Current weather conditions are not favorable for disease spread."
+  },
+  "top_predictions": [
+    { "class_name": "Peach___Bacterial_spot", "display_name": "Bacterial Spot", "confidence": 100 },
+    { "class_name": "Tomato___Early_blight", "display_name": "Early Blight", "confidence": 0 },
+    { "class_name": "Tomato___Septoria_leaf_spot", "display_name": "Septoria Leaf Spot", "confidence": 0 }
+  ]
+}
