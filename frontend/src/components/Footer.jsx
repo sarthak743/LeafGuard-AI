@@ -13,7 +13,7 @@ export default function Footer() {
 
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com"
+            href="https://github.com/sarthak743"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
@@ -22,7 +22,7 @@ export default function Footer() {
             <Github size={16} />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/sarthak-brid-a5727b379/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
@@ -31,7 +31,7 @@ export default function Footer() {
             <Linkedin size={16} />
           </a>
           <a
-            href="mailto:contact@leafguard.ai"
+            href="mailto:sarthakbrid9c24@gmail.com"
             aria-label="Email"
             className="grid place-items-center h-9 w-9 rounded-full bg-bg text-ink/50 hover:text-primary hover:bg-canopy hover:scale-110 hover:shadow-soft transition-all duration-300"
           >
