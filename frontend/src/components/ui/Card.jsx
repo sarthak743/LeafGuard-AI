@@ -8,7 +8,7 @@ export default function Card({ children, className = '', delay = 0, as = 'div', 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={`rounded-xl2 border ${highlight ? 'border-primary/30 bg-canopy' : 'border-black/5 bg-white'} shadow-card p-6 md:p-8 ${className}`}
+      className={`rounded-xl2 border ${highlight ? 'border-primary/30 bg-canopy' : 'border-black/5 bg-white'} shadow-card p-6 md:p-8 transform-gpu transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2.5 hover:scale-[1.015] hover:shadow-lift ${className}`}
     >
       {children}
     </Comp>

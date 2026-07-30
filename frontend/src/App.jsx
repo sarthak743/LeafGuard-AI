@@ -20,22 +20,65 @@ export default function App() {
   // Replace this with the real FastAPI request. Build a FormData with the
   // image file (+ lat/lng if weatherEnabled) and POST it to your backend,
   // then setResult(await response.json()).
-  const handleAnalyze = ({ file, weatherEnabled }) => {
+  const handleAnalyze = async ({ file, weatherEnabled, coords }) => {
+    console.log('[App] weatherToggle value:', weatherEnabled)
+    console.log('[App] coords:', coords)
+
     setAnalyzing(true)
     setResult(null)
 
-    setTimeout(() => {
-      const data = JSON.parse(JSON.stringify(placeholderResult))
+    const startTime = Date.now()
+    const MIN_LOADING_TIME = 6500 // Enforce ~6.5 second loading duration
+
+    let data = null
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      if (weatherEnabled && coords?.latitude && coords?.longitude) {
+        formData.append('latitude', coords.latitude)
+        formData.append('longitude', coords.longitude)
+      }
+
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+      const res = await fetch(`${apiUrl}/predict`, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (res.ok) {
+        data = await res.json()
+        console.log('[App] API weather object:', data.weather)
+        console.log('[App] API weather_advisory object:', data.weather_advisory)
+      } else {
+        console.warn('[App] API request returned status:', res.status)
+      }
+    } catch (err) {
+      console.warn('[App] API fetch error (using fallback data):', err)
+    }
+
+    if (!data) {
+      // Fallback data when backend is not running or request failed
+      data = JSON.parse(JSON.stringify(placeholderResult))
       if (!weatherEnabled) {
         delete data.weather
         delete data.weather_advisory
       }
+      console.log('[App] Fallback weather object:', data.weather)
+      console.log('[App] Fallback weather_advisory object:', data.weather_advisory)
+    }
+
+    // Ensure total loading duration is approximately 6.5 seconds for a premium experience
+    const elapsed = Date.now() - startTime
+    const delay = Math.max(0, MIN_LOADING_TIME - elapsed)
+
+    setTimeout(() => {
       setAnalyzing(false)
       setResult(data)
       requestAnimationFrame(() => {
         resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       })
-    }, 2600)
+    }, delay)
   }
 
   const handleReset = () => {

@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import { motion } from 'framer-motion'
-import { RotateCcw } from 'lucide-react'
+import { RotateCcw, Download } from 'lucide-react'
 import DiagnosisCard from './DiagnosisCard.jsx'
 import TopPredictions from './TopPredictions.jsx'
 import DescriptionCard from './DescriptionCard.jsx'
@@ -58,10 +58,9 @@ const ResultsSection = forwardRef(function ResultsSection({ result, onReset }, r
           <WeatherAdvisory
             weather={weather}
             advisory={weather_advisory}
-            idealConditions={details?.weather_conditions}
           />
 
-          <div className="flex justify-center pt-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
             <button
               onClick={onReset}
               className="group inline-flex items-center gap-2 rounded-full border border-primary/30 px-7 py-3.5 font-semibold text-primary hover:bg-primary hover:text-white transition-colors duration-300"
@@ -69,6 +68,21 @@ const ResultsSection = forwardRef(function ResultsSection({ result, onReset }, r
               <RotateCcw size={17} className="group-hover:-rotate-180 transition-transform duration-500" />
               Analyze another leaf
             </button>
+
+            <div className="group relative">
+              <button
+                disabled
+                aria-label="Download PDF (Coming Soon)"
+                className="group inline-flex items-center gap-2 rounded-full border border-primary/30 px-7 py-3.5 font-semibold text-primary hover:bg-primary hover:text-white transition-colors duration-300 opacity-90 cursor-not-allowed"
+              >
+                <Download size={17} className="group-hover:translate-y-0.5 transition-transform duration-300" />
+                Download PDF
+              </button>
+              {/* Tooltip */}
+              <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-ink text-white text-xs font-mono px-2.5 py-1 rounded-md shadow-md whitespace-nowrap z-10">
+                Coming Soon
+              </div>
+            </div>
           </div>
         </div>
       </div>

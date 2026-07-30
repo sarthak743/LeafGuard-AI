@@ -6,6 +6,8 @@ Prediction routes for the LeafGuard API.
 
 import logging
 
+from typing import Optional
+
 from fastapi import (
     APIRouter,
     UploadFile,
@@ -34,8 +36,8 @@ router = APIRouter()
 )
 async def predict_image(
     file: UploadFile = File(...),
-    latitude: float = Form(...),
-    longitude: float = Form(...)
+    latitude: Optional[float] = Form(None),
+    longitude: Optional[float] = Form(None)
 ):
     """
     Predict plant disease from an uploaded image.
@@ -44,9 +46,8 @@ async def predict_image(
     returns success=True, the primary prediction with full disease details,
     and the list of Top-3 predictions.
 
-    If the top prediction confidence < CONFIDENCE_THRESHOLD (70%),
-    returns success=False with a recommendation message, top confidence,
-    and the list of Top-3 predictions (no disease lookup).
+    If latitude & longitude are provided, includes current weather and
+    weather-based disease advisory.
     """
 
     # Preprocess uploaded image
@@ -78,19 +79,23 @@ async def predict_image(
         # Perform disease database lookup ONLY for Top-1 prediction
         details = get_disease_info(top_1_class)
 
-        try:
-            weather = await WeatherService.get_current_weather(
-                latitude,
-                longitude
-            )
+        if latitude is not None and longitude is not None:
+            try:
+                weather = await WeatherService.get_current_weather(
+                    latitude,
+                    longitude
+                )
 
-            weather_advisory = WeatherAdvisory.generate(
-                weather,
-                details
-            )
+                weather_advisory = WeatherAdvisory.generate(
+                    weather,
+                    details
+                )
 
-        except Exception as e:
-            logger.warning(f"Weather service unavailable: {e}")
+            except Exception as e:
+                logger.warning(f"Weather service unavailable: {e}")
+                weather = None
+                weather_advisory = None
+        else:
             weather = None
             weather_advisory = None
 

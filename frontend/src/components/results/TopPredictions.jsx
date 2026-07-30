@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { BrainCircuit } from 'lucide-react'
 import Card from '../ui/Card.jsx'
 
 const RANK_LABEL = ['Most likely', '2nd likely', '3rd likely']
@@ -9,7 +10,12 @@ export default function TopPredictions({ predictions }) {
 
   return (
     <Card>
-      <h3 className="text-lg font-semibold text-ink mb-6">Top predictions</h3>
+      <div className="flex items-center gap-2 mb-6">
+        <span className="grid place-items-center h-9 w-9 rounded-full bg-canopy text-primary">
+          <BrainCircuit size={16} />
+        </span>
+        <h3 className="text-lg font-semibold text-ink">Top predictions</h3>
+      </div>
       <div className="flex flex-col gap-6">
         {top3.map((p, i) => (
           <div key={p.class_name}>

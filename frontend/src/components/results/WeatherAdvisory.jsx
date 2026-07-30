@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { MapPin, Thermometer, Droplets, CloudRain, CloudDrizzle, Gauge } from 'lucide-react'
+import { MapPin, Thermometer, Droplets, CloudRain, CloudSun, Gauge } from 'lucide-react'
 import Card from '../ui/Card.jsx'
 
 const RISK_STYLES = {
@@ -8,12 +8,22 @@ const RISK_STYLES = {
   High: 'bg-red-50 text-red-700 ring-red-600/20',
 }
 
-export default function WeatherAdvisory({ weather, advisory, idealConditions }) {
+export default function WeatherAdvisory({ weather, advisory }) {
+  console.log('[WeatherAdvisory Component] Props received:', {
+    weather,
+    advisory,
+  })
+
   if (!weather && !advisory) return null
 
   return (
     <Card className="md:col-span-2">
-      <h3 className="text-lg font-semibold text-ink mb-6">Weather advisory</h3>
+      <div className="flex items-center gap-2 mb-6">
+        <span className="grid place-items-center h-9 w-9 rounded-full bg-canopy text-primary">
+          <CloudSun size={16} />
+        </span>
+        <h3 className="text-lg font-semibold text-ink">Weather advisory</h3>
+      </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         {weather && (
@@ -22,10 +32,10 @@ export default function WeatherAdvisory({ weather, advisory, idealConditions }) 
               <MapPin size={15} className="text-primary" /> {weather.location}
             </div>
             <div className="grid grid-cols-3 gap-4">
-              <Stat icon={Thermometer} label="Temp" value={`${weather.temperature}°C`} />
+              <Stat icon={Thermometer} label="Temp" value={`${weather.temperature}\u00B0C`} />
               <Stat icon={Droplets} label="Humidity" value={`${weather.humidity}%`} />
               <Stat
-                icon={weather.rain ? CloudRain : CloudDrizzle}
+                icon={weather.rain ? CloudRain : CloudSun}
                 label="Rain"
                 value={weather.rain ? 'Yes' : 'None'}
               />
@@ -60,23 +70,6 @@ export default function WeatherAdvisory({ weather, advisory, idealConditions }) 
           </div>
         )}
       </div>
-
-      {idealConditions && (
-        <div className="mt-6 rounded-2xl border border-dashed border-primary/25 p-6">
-          <p className="text-xs font-mono uppercase tracking-wide text-ink/40 mb-4">
-            Ideal conditions for spread
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {idealConditions.temperature_range && (
-              <Pill>
-                {idealConditions.temperature_range.min}°–{idealConditions.temperature_range.max}°C
-              </Pill>
-            )}
-            {idealConditions.high_humidity && <Pill>High humidity</Pill>}
-            {idealConditions.rain_required && <Pill>Rain present</Pill>}
-          </div>
-        </div>
-      )}
     </Card>
   )
 }
@@ -88,13 +81,5 @@ function Stat({ icon: Icon, label, value }) {
       <span className="text-base font-semibold font-mono text-ink">{value}</span>
       <span className="text-xs text-ink/40">{label}</span>
     </div>
-  )
-}
-
-function Pill({ children }) {
-  return (
-    <span className="rounded-full bg-canopy px-3.5 py-1.5 text-xs font-medium text-primary">
-      {children}
-    </span>
   )
 }

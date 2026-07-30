@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Check } from 'lucide-react'
+import { ShieldCheck } from 'lucide-react'
 import Card from '../ui/Card.jsx'
 
 export default function PreventionCard({ prevention }) {
@@ -17,8 +17,8 @@ export default function PreventionCard({ prevention }) {
             transition={{ delay: i * 0.08 }}
             className="flex items-start gap-3"
           >
-            <span className="grid place-items-center h-6 w-6 rounded-full bg-primary text-white shrink-0 mt-0.5">
-              <Check size={13} strokeWidth={3} />
+            <span className="grid place-items-center h-6 w-6 rounded-full bg-canopy text-primary shrink-0 mt-0.5">
+              <ShieldCheck size={13} />
             </span>
             <span className="text-sm text-ink/70 leading-relaxed">{p}</span>
           </motion.li>

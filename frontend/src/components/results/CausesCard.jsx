@@ -1,4 +1,4 @@
-import { Bug } from 'lucide-react'
+import { Microscope } from 'lucide-react'
 import Card from '../ui/Card.jsx'
 
 export default function CausesCard({ causes }) {
@@ -10,7 +10,7 @@ export default function CausesCard({ causes }) {
         {causes.map((c, i) => (
           <li key={i} className="flex items-start gap-3">
             <span className="grid place-items-center h-6 w-6 rounded-full bg-clay/10 text-clay shrink-0 mt-0.5">
-              <Bug size={13} />
+              <Microscope size={13} />
             </span>
             <span className="text-sm text-ink/70 leading-relaxed">{c}</span>
           </li>

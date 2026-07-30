@@ -15,7 +15,7 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 rounded-full bg-canopy px-4 py-1.5 text-sm font-medium text-primary mb-6 font-mono"
           >
-            <Sparkles size={14} /> Trained on 40+ crop diseases
+            <Sparkles size={14} /> Trained on 30+ plant diseases
           </motion.div>
 
           <motion.h1
@@ -101,46 +101,70 @@ export default function Hero() {
 
 function LeafIllustration() {
   return (
-    <svg viewBox="0 0 400 400" className="h-full w-full drop-shadow-[0_20px_40px_rgba(46,125,50,0.25)]">
+    <svg viewBox="0 0 400 440" className="h-full w-full" style={{ filter: 'drop-shadow(0 24px 48px rgba(27,94,32,0.30))' }}>
       <defs>
-        <linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#66BB6A" />
-          <stop offset="100%" stopColor="#2E7D32" />
+        <radialGradient id="lf" cx="0.42" cy="0.38" r="0.62" fx="0.3" fy="0.28">
+          <stop offset="0%" stopColor="#8BC34A" />
+          <stop offset="25%" stopColor="#689F38" />
+          <stop offset="55%" stopColor="#33691E" />
+          <stop offset="100%" stopColor="#1B5E20" />
+        </radialGradient>
+        <radialGradient id="lfHi" cx="0.35" cy="0.3" r="0.5">
+          <stop offset="0%" stopColor="white" stopOpacity="0.22" />
+          <stop offset="100%" stopColor="white" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id="vn" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#C5E1A5" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#33691E" stopOpacity="0.2" />
         </linearGradient>
       </defs>
+
+      {/* Stem */}
+      <path d="M200 350 Q 202 380, 200 430" stroke="#5D4037" strokeWidth="5" fill="none" strokeLinecap="round" />
+
+      {/* Leaf body */}
       <path
-        d="M200 40 C 320 60, 360 180, 300 280 C 250 360, 140 360, 90 290 C 40 220, 60 100, 200 40 Z"
-        fill="url(#leafGrad)"
+        d="M200 30 C 105 55, 40 150, 60 240 C 75 310, 130 350, 175 362 C 190 366, 200 367, 200 367 C 200 367, 210 366, 225 362 C 270 350, 325 310, 340 240 C 360 150, 295 55, 200 30 Z"
+        fill="url(#lf)"
       />
+
+      {/* Highlight sheen */}
       <path
-        d="M200 60 C 200 140, 200 260, 210 340"
-        stroke="#E8F5E9"
-        strokeWidth="4"
-        fill="none"
-        strokeLinecap="round"
+        d="M200 30 C 105 55, 40 150, 60 240 C 75 310, 130 350, 175 362 C 190 366, 200 367, 200 367 C 200 367, 210 366, 225 362 C 270 350, 325 310, 340 240 C 360 150, 295 55, 200 30 Z"
+        fill="url(#lfHi)"
       />
-      {[70, 110, 150, 190, 230, 270].map((y, i) => (
-        <path
-          key={y}
-          d={`M200 ${y} C 240 ${y + 10}, 260 ${y + 20}, 275 ${y + 35}`}
-          stroke="#E8F5E9"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-          opacity="0.85"
-        />
-      ))}
-      {[90, 130, 170, 210, 250].map((y, i) => (
-        <path
-          key={`l-${y}`}
-          d={`M200 ${y} C 160 ${y + 10}, 140 ${y + 18}, 125 ${y + 32}`}
-          stroke="#E8F5E9"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-          opacity="0.85"
-        />
-      ))}
+
+      {/* Midrib */}
+      <path d="M200 48 Q 199 200, 200 362" stroke="url(#vn)" strokeWidth="3" fill="none" strokeLinecap="round" />
+
+      {/* Right veins */}
+      <path d="M200 85 Q 245 92, 280 115" stroke="#A5D6A7" strokeWidth="1.6" fill="none" strokeLinecap="round" opacity="0.55" />
+      <path d="M200 125 Q 255 138, 300 170" stroke="#A5D6A7" strokeWidth="1.6" fill="none" strokeLinecap="round" opacity="0.50" />
+      <path d="M200 170 Q 260 188, 315 225" stroke="#A5D6A7" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.45" />
+      <path d="M200 215 Q 255 235, 310 275" stroke="#A5D6A7" strokeWidth="1.4" fill="none" strokeLinecap="round" opacity="0.40" />
+      <path d="M200 260 Q 245 278, 290 315" stroke="#A5D6A7" strokeWidth="1.3" fill="none" strokeLinecap="round" opacity="0.35" />
+      <path d="M200 305 Q 230 318, 260 345" stroke="#A5D6A7" strokeWidth="1.2" fill="none" strokeLinecap="round" opacity="0.30" />
+
+      {/* Left veins */}
+      <path d="M200 85 Q 155 92, 120 115" stroke="#A5D6A7" strokeWidth="1.6" fill="none" strokeLinecap="round" opacity="0.55" />
+      <path d="M200 125 Q 145 138, 100 170" stroke="#A5D6A7" strokeWidth="1.6" fill="none" strokeLinecap="round" opacity="0.50" />
+      <path d="M200 170 Q 140 188, 85 225" stroke="#A5D6A7" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.45" />
+      <path d="M200 215 Q 145 235, 90 275" stroke="#A5D6A7" strokeWidth="1.4" fill="none" strokeLinecap="round" opacity="0.40" />
+      <path d="M200 260 Q 155 278, 110 315" stroke="#A5D6A7" strokeWidth="1.3" fill="none" strokeLinecap="round" opacity="0.35" />
+      <path d="M200 305 Q 170 318, 140 345" stroke="#A5D6A7" strokeWidth="1.2" fill="none" strokeLinecap="round" opacity="0.30" />
+
+      {/* Tertiary detail veins (right) */}
+      <path d="M240 100 Q 255 108, 262 122" stroke="#C5E1A5" strokeWidth="0.8" fill="none" strokeLinecap="round" opacity="0.3" />
+      <path d="M250 150 Q 270 160, 278 178" stroke="#C5E1A5" strokeWidth="0.8" fill="none" strokeLinecap="round" opacity="0.25" />
+      <path d="M255 200 Q 275 212, 285 232" stroke="#C5E1A5" strokeWidth="0.8" fill="none" strokeLinecap="round" opacity="0.22" />
+
+      {/* Tertiary detail veins (left) */}
+      <path d="M160 100 Q 145 108, 138 122" stroke="#C5E1A5" strokeWidth="0.8" fill="none" strokeLinecap="round" opacity="0.3" />
+      <path d="M150 150 Q 130 160, 122 178" stroke="#C5E1A5" strokeWidth="0.8" fill="none" strokeLinecap="round" opacity="0.25" />
+      <path d="M145 200 Q 125 212, 115 232" stroke="#C5E1A5" strokeWidth="0.8" fill="none" strokeLinecap="round" opacity="0.22" />
+
+      {/* Edge highlight (left side) */}
+      <path d="M200 30 C 105 55, 40 150, 60 240 C 75 310, 130 350, 175 362" stroke="#A5D6A7" strokeWidth="1.2" fill="none" opacity="0.18" strokeLinecap="round" />
     </svg>
   )
 }
