@@ -39,7 +39,7 @@ export default function Footer() {
         </div>
 
         <p className="text-sm text-ink/40 text-center sm:text-right">
-          © {new Date().getFullYear()} LeafGuard. Grown with care. Made by ssb.
+          © {new Date().getFullYear()} LeafGuard. Grown with care.
         </p>
       </div>
     </footer>
