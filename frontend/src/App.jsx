@@ -11,6 +11,7 @@ import Footer from './components/Footer.jsx'
 import VeinDivider from './components/ui/VeinDivider.jsx'
 import ClickSpark from './components/effects/ClickSpark.jsx'
 import placeholderResult from './data/placeholderResult.json'
+import { uploadImage } from "./api/prediction.js"
 
 export default function App() {
   const [analyzing, setAnalyzing] = useState(false)
@@ -18,9 +19,6 @@ export default function App() {
   const resultsRef = useRef(null)
   const uploadKey = useRef(0)
 
-  // Replace this with the real FastAPI request. Build a FormData with the
-  // image file (+ lat/lng if weatherEnabled) and POST it to your backend,
-  // then setResult(await response.json()).
   const handleAnalyze = async ({ file, weatherEnabled, coords }) => {
     console.log('[App] weatherToggle value:', weatherEnabled)
     console.log('[App] coords:', coords)
@@ -41,19 +39,12 @@ export default function App() {
         formData.append('longitude', coords.longitude)
       }
 
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000'
-      const res = await fetch(`${apiUrl}/predict`, {
-        method: 'POST',
-        body: formData,
-      })
+      data = await uploadImage(formData)
 
-      if (res.ok) {
-        data = await res.json()
-        console.log('[App] API weather object:', data.weather)
-        console.log('[App] API weather_advisory object:', data.weather_advisory)
-      } else {
-        console.warn('[App] API request returned status:', res.status)
-      }
+      console.log("FULL API RESPONSE:", data);
+      console.log("Weather:", data.weather);
+      console.log("Weather Advisory:", data.weather_advisory);
+
     } catch (err) {
       console.warn('[App] API fetch error (using fallback data):', err)
     }

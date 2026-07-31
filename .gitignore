@@ -54,4 +54,10 @@ backend/outputs/
 needed
 
 #frontend
-leafguard/node_modules
+frontend/node_modules
+frontend/package.json
+frontend/package-lock.json
+
+node_modules
+package-lock.json
+package.json
