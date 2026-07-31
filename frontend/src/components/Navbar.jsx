@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Leaf, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import LeafGuardLogo from './ui/LeafGuardLogo.jsx'
 
 const LINKS = [
   { label: 'Home', href: '#home' },
@@ -26,8 +27,8 @@ export default function Navbar() {
     >
       <nav className="mx-auto max-w-7xl px-6 md:px-10 h-[72px] flex items-center justify-between">
         <a href="#home" className="flex items-center gap-2 group">
-          <span className="grid place-items-center h-9 w-9 rounded-full bg-primary text-white shadow-soft group-hover:rotate-12 transition-transform duration-300">
-            <Leaf size={18} strokeWidth={2.5} />
+          <span className="group-hover:rotate-12 transition-transform duration-300">
+            <LeafGuardLogo size={36} />
           </span>
           <span className="font-display text-xl font-semibold text-ink">LeafGuard</span>
         </a>

@@ -1,17 +1,16 @@
-import { Leaf, Github, Linkedin, Mail } from 'lucide-react'
+import { Github, Linkedin, Mail } from 'lucide-react'
+import LeafGuardLogo from './ui/LeafGuardLogo.jsx'
 
 export default function Footer() {
   return (
     <footer className="border-t border-black/5 py-10">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-2">
-          <span className="grid place-items-center h-7 w-7 rounded-full bg-primary text-white">
-            <Leaf size={13} />
-          </span>
+      <div className="mx-auto max-w-7xl px-6 md:px-10 grid grid-cols-1 sm:grid-cols-3 items-center gap-6">
+        <div className="flex items-center justify-center sm:justify-start gap-2">
+          <LeafGuardLogo size={28} />
           <span className="font-display font-semibold text-ink">LeafGuard</span>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-center gap-3">
           <a
             href="https://github.com/sarthak743"
             target="_blank"
@@ -39,7 +38,9 @@ export default function Footer() {
           </a>
         </div>
 
-        <p className="text-sm text-ink/40">© {new Date().getFullYear()} LeafGuard. Grown with care.</p>
+        <p className="text-sm text-ink/40 text-center sm:text-right">
+          © {new Date().getFullYear()} LeafGuard. Grown with care. Made by ssb.
+        </p>
       </div>
     </footer>
   )

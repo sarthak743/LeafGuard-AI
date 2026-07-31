@@ -9,6 +9,7 @@ import LoadingState from './components/LoadingState.jsx'
 import ResultsSection from './components/results/ResultsSection.jsx'
 import Footer from './components/Footer.jsx'
 import VeinDivider from './components/ui/VeinDivider.jsx'
+import ClickSpark from './components/effects/ClickSpark.jsx'
 import placeholderResult from './data/placeholderResult.json'
 
 export default function App() {
@@ -28,7 +29,7 @@ export default function App() {
     setResult(null)
 
     const startTime = Date.now()
-    const MIN_LOADING_TIME = 6500 // Enforce ~6.5 second loading duration
+    const MIN_LOADING_TIME = 5000 // Enforce exactly 5.0 second loading duration
 
     let data = null
 
@@ -88,23 +89,26 @@ export default function App() {
   }
 
   return (
-    <div className="relative">
-      <Navbar />
-      <main>
-        <Hero />
-        <VeinDivider />
-        <Features />
-        <HowItWorks />
-        <VeinDivider flip />
-        <UploadSection key={uploadKey.current} onAnalyze={handleAnalyze} analyzing={analyzing} />
+    <ClickSpark>
+      <div className="relative">
+        <Navbar />
+        <main>
+          <Hero />
+          <VeinDivider />
+          <Features />
+          <HowItWorks />
+          <VeinDivider flip />
+          <UploadSection key={uploadKey.current} onAnalyze={handleAnalyze} analyzing={analyzing} />
 
-        <AnimatePresence>{analyzing && <LoadingState />}</AnimatePresence>
+          <AnimatePresence>{analyzing && <LoadingState />}</AnimatePresence>
 
-        <AnimatePresence>
-          {result && <ResultsSection ref={resultsRef} result={result} onReset={handleReset} />}
-        </AnimatePresence>
-      </main>
-      <Footer />
-    </div>
+          <AnimatePresence>
+            {result && <ResultsSection ref={resultsRef} result={result} onReset={handleReset} />}
+          </AnimatePresence>
+        </main>
+        <Footer />
+      </div>
+    </ClickSpark>
   )
 }
+
