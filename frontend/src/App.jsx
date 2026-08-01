@@ -16,15 +16,17 @@ import { uploadImage } from "./api/prediction.js"
 export default function App() {
   const [analyzing, setAnalyzing] = useState(false)
   const [result, setResult] = useState(null)
+  const [uploadedImage, setUploadedImage] = useState(null)
   const resultsRef = useRef(null)
   const uploadKey = useRef(0)
 
-  const handleAnalyze = async ({ file, weatherEnabled, coords }) => {
+  const handleAnalyze = async ({ file, preview, weatherEnabled, coords }) => {
     console.log('[App] weatherToggle value:', weatherEnabled)
     console.log('[App] coords:', coords)
 
     setAnalyzing(true)
     setResult(null)
+    setUploadedImage(preview || null)
 
     const startTime = Date.now()
     const MIN_LOADING_TIME = 5000 // Enforce exactly 5.0 second loading duration
@@ -75,6 +77,7 @@ export default function App() {
 
   const handleReset = () => {
     setResult(null)
+    setUploadedImage(null)
     uploadKey.current += 1
     document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
@@ -98,7 +101,12 @@ export default function App() {
             {result && (
               <>
                 <VeinDivider flip />
-                <ResultsSection ref={resultsRef} result={result} onReset={handleReset} />
+                <ResultsSection
+                  ref={resultsRef}
+                  result={result}
+                  uploadedImage={uploadedImage}
+                  onReset={handleReset}
+                />
               </>
             )}
           </AnimatePresence>

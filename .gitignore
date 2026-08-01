@@ -1,63 +1,53 @@
-# Python Caches & Bytecode
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 
-# Virtual Environments
+# Virtual Environment
 .venv/
 venv/
 env/
-ENV/
 backend/venv/
 
-# Environment Variables & Secrets
+# Environment Variables
 .env
 *.env
 .env.*
 
-# IDE & Editor Files
+# IDE
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# OS Specific Files
+# OS
 .DS_Store
 Thumbs.db
-ehthumbs.db
-Desktop.ini
 
-# Log Files
+# Logs
 *.log
 logs/
 
-# Node / Frontend Dependencies & Builds
+# Node
+node_modules/
 frontend/node_modules/
+
+# Build
+dist/
 frontend/dist/
+build/
 frontend/build/
 
-# Dataset Folders (Ignores heavy raw/processed image folders, preserves class_names.json)
-backend/data/raw/
-backend/data/processed/
-    
-# Model Weights & Artifacts
+# Model Artifacts
 backend/models/*.pth
 backend/models/*.pt
 
-# Training & Evaluation Output Logs/Plots
+# Dataset
+backend/data/raw/
+backend/data/processed/
+
+# Outputs
 backend/outputs/
 
-# Custom Local Folders
-needed
-
-#frontend
-frontend/node_modules
-frontend/package.json
-frontend/package-lock.json
-
-node_modules
-package-lock.json
-package.json
+# Local Folder
+needed/

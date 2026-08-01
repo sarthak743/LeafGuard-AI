@@ -238,6 +238,7 @@ export default function UploadSection({ onAnalyze, analyzing }) {
               console.log('[UploadSection] coords:', coords)
               onAnalyze({
                 file,
+                preview,
                 weatherEnabled,
                 coords,
               })

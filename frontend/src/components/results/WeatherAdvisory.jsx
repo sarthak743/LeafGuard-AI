@@ -66,7 +66,7 @@ export default function WeatherAdvisory({ weather, advisory }) {
                 <Gauge size={15} className="text-primary" /> Disease spread risk
               </span>
               <span
-                className={`inline-flex items-center rounded-full ring-1 ring-inset px-3 py-1 text-xs font-semibold ${
+                className={`inline-flex items-center justify-center rounded-full ring-1 ring-inset px-3.5 py-1.5 text-xs font-semibold leading-none h-7 shrink-0 ${
                   RISK_STYLES[advisory.risk] || RISK_STYLES.Medium
                 }`}
               >

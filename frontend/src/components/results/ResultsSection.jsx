@@ -1,6 +1,6 @@
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { RotateCcw, Download } from 'lucide-react'
+import { RotateCcw, Download, Loader2 } from 'lucide-react'
 import DiagnosisCard from './DiagnosisCard.jsx'
 import TopPredictions from './TopPredictions.jsx'
 import DescriptionCard from './DescriptionCard.jsx'
@@ -12,6 +12,7 @@ import RecommendedAction from './RecommendedAction.jsx'
 import WeatherAdvisory from './WeatherAdvisory.jsx'
 import TipsCard from './TipsCard.jsx'
 import SectionHeading from '../ui/SectionHeading.jsx'
+import { generateReport } from '../../utils/pdf/generateReport.js'
 
 const HEALTHY_MAINTENANCE_TIPS =
   'Continue regular monitoring, water appropriately at the root level, maintain proper plant spacing, inspect leaves periodically, and keep good airflow around the canopy.'
@@ -19,7 +20,12 @@ const HEALTHY_MAINTENANCE_TIPS =
 const HEALTHY_DESCRIPTION_FALLBACK =
   'No visible disease symptoms were detected on this leaf. The plant tissue appears healthy and vigorous.'
 
-const ResultsSection = forwardRef(function ResultsSection({ result, onReset }, ref) {
+const ResultsSection = forwardRef(function ResultsSection(
+  { result, uploadedImage, onReset },
+  ref
+) {
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
+
   if (!result) return null
 
   const prediction = result?.prediction
@@ -28,6 +34,18 @@ const ResultsSection = forwardRef(function ResultsSection({ result, onReset }, r
   const isLowConfidence = !result.success
   const isHealthy = result.success && details?.severity === 'Healthy'
   const isDiseased = result.success && details?.severity !== 'Healthy'
+
+  const handleDownloadPDF = async () => {
+    if (isGeneratingPDF || isLowConfidence) return
+    setIsGeneratingPDF(true)
+    try {
+      await generateReport(result, uploadedImage)
+    } catch (err) {
+      console.error('[ResultsSection] Error generating PDF report:', err)
+    } finally {
+      setIsGeneratingPDF(false)
+    }
+  }
 
   return (
     <motion.section
@@ -124,22 +142,29 @@ const ResultsSection = forwardRef(function ResultsSection({ result, onReset }, r
               Analyze another leaf
             </button>
 
-            {/* Download PDF button (Hidden for Low Confidence) */}
+            {/* Download PDF Button */}
             {!isLowConfidence && (
-              <div className="group relative">
-                <button
-                  disabled
-                  aria-label="Download PDF (Coming Soon)"
-                  className="group inline-flex items-center gap-2 rounded-full border border-primary/30 px-7 py-3.5 font-semibold text-primary hover:bg-primary hover:text-white transition-colors duration-300 opacity-90 cursor-not-allowed"
-                >
-                  <Download size={17} className="group-hover:translate-y-0.5 transition-transform duration-300" />
-                  Download PDF
-                </button>
-                {/* Tooltip */}
-                <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-ink text-white text-xs font-mono px-2.5 py-1 rounded-md shadow-md whitespace-nowrap z-10">
-                  Coming Soon
-                </div>
-              </div>
+              <button
+                onClick={handleDownloadPDF}
+                disabled={isGeneratingPDF}
+                aria-label="Download PDF Report"
+                className="group inline-flex items-center gap-2 rounded-full border border-primary/30 px-7 py-3.5 font-semibold text-primary hover:bg-primary hover:text-white transition-all duration-300 shadow-soft hover:shadow-lift disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isGeneratingPDF ? (
+                  <>
+                    <Loader2 size={17} className="animate-spin" />
+                    Generating PDF...
+                  </>
+                ) : (
+                  <>
+                    <Download
+                      size={17}
+                      className="group-hover:translate-y-0.5 transition-transform duration-300"
+                    />
+                    Download PDF
+                  </>
+                )}
+              </button>
             )}
           </div>
         </div>

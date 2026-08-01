@@ -32,6 +32,17 @@ const SEVERITY_THEME = {
 
 const DEFAULT_THEME = SEVERITY_THEME.Medium
 
+function normalizeLevel(lvl) {
+  if (!lvl) return 'Medium'
+  const s = String(lvl).trim().toLowerCase()
+  if (s === 'healthy') return 'Healthy'
+  if (s === 'low') return 'Low'
+  if (s === 'medium') return 'Medium'
+  if (s === 'high') return 'High'
+  if (s === 'very high' || s === 'very_high' || s === 'veryhigh') return 'Very High'
+  return lvl
+}
+
 export default function DiagnosisCard({
   plant,
   disease,
@@ -54,7 +65,7 @@ export default function DiagnosisCard({
 
         <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="max-w-xl">
-            <div className="flex items-center gap-2 text-zinc-400 -xs font-mono uppercase tracking-wide mb-3">
+            <div className="flex items-center gap-2 text-zinc-400 text-xs font-mono uppercase tracking-wide mb-3">
               <AlertTriangle size={15} className="text-amber-400" /> Low Confidence Classification
             </div>
             <h3 className="text-2xl md:text-3xl font-semibold leading-snug text-white">
@@ -82,7 +93,8 @@ export default function DiagnosisCard({
     )
   }
 
-  const theme = SEVERITY_THEME[severity] || DEFAULT_THEME
+  const safeSeverity = normalizeLevel(severity)
+  const theme = SEVERITY_THEME[safeSeverity] || DEFAULT_THEME
 
   return (
     <motion.div
@@ -101,8 +113,8 @@ export default function DiagnosisCard({
             <Leaf size={15} /> {plant}
           </div>
           <h3 className="text-3xl md:text-4xl font-semibold">{disease}</h3>
-          <div className="mt-4">
-            <SeverityBadge level={severity} size="lg" />
+          <div className="mt-4 flex items-center">
+            <SeverityBadge level={safeSeverity} size="lg" />
           </div>
         </div>
 
