@@ -21,6 +21,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "https://leaf-guard-ai-orcin.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
