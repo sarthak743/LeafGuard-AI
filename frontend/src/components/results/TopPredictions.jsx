@@ -4,7 +4,7 @@ import Card from '../ui/Card.jsx'
 
 const RANK_LABEL = ['Most likely', '2nd likely', '3rd likely']
 
-export default function TopPredictions({ predictions }) {
+export default function TopPredictions({ predictions, title = 'Top predictions' }) {
   if (!predictions?.length) return null
   const top3 = predictions.slice(0, 3)
 
@@ -14,7 +14,7 @@ export default function TopPredictions({ predictions }) {
         <span className="grid place-items-center h-9 w-9 rounded-full bg-canopy text-primary">
           <BrainCircuit size={16} />
         </span>
-        <h3 className="text-lg font-semibold text-ink">Top predictions</h3>
+        <h3 className="text-lg font-semibold text-ink">{title}</h3>
       </div>
       <div className="flex flex-col gap-6">
         {top3.map((p, i) => (

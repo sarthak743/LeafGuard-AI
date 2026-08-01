@@ -38,9 +38,14 @@ export default function Footer() {
           </a>
         </div>
 
-        <p className="text-sm text-ink/40 text-center sm:text-right">
-          © {new Date().getFullYear()} LeafGuard. Grown with care.
-        </p>
+        <div className="text-center sm:text-right">
+          <p className="text-sm text-ink/40">
+            © {new Date().getFullYear()} LeafGuard. Grown with care.
+          </p>
+          <p className="text-sm text-ink/40">
+            Built by Sarthak.
+          </p>
+        </div>
       </div>
     </footer>
   )

@@ -87,14 +87,20 @@ export default function App() {
           <Hero />
           <VeinDivider />
           <Features />
-          <HowItWorks />
           <VeinDivider flip />
+          <HowItWorks />
+          <VeinDivider />
           <UploadSection key={uploadKey.current} onAnalyze={handleAnalyze} analyzing={analyzing} />
 
           <AnimatePresence>{analyzing && <LoadingState />}</AnimatePresence>
 
           <AnimatePresence>
-            {result && <ResultsSection ref={resultsRef} result={result} onReset={handleReset} />}
+            {result && (
+              <>
+                <VeinDivider flip />
+                <ResultsSection ref={resultsRef} result={result} onReset={handleReset} />
+              </>
+            )}
           </AnimatePresence>
         </main>
         <Footer />
@@ -102,4 +108,3 @@ export default function App() {
     </ClickSpark>
   )
 }
-

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Leaf } from 'lucide-react'
+import { Leaf, AlertTriangle } from 'lucide-react'
 import SeverityBadge from '../ui/SeverityBadge.jsx'
 
 const SEVERITY_THEME = {
@@ -32,7 +32,56 @@ const SEVERITY_THEME = {
 
 const DEFAULT_THEME = SEVERITY_THEME.Medium
 
-export default function DiagnosisCard({ plant, disease, confidence, severity }) {
+export default function DiagnosisCard({
+  plant,
+  disease,
+  confidence,
+  severity,
+  isLowConfidence = false,
+  message = '',
+}) {
+  if (isLowConfidence) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.6 }}
+        className="relative overflow-hidden rounded-xl2 bg-gradient-to-br from-slate-800 via-zinc-800 to-zinc-900 text-white p-8 md:p-10 shadow-lift transform-gpu transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2.5 hover:scale-[1.015] border border-white/10"
+      >
+        <div className="absolute -right-10 -top-10 h-52 w-52 rounded-full bg-white/5" />
+        <div className="absolute -right-4 bottom-0 h-32 w-32 rounded-full bg-white/[0.03]" />
+
+        <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="max-w-xl">
+            <div className="flex items-center gap-2 text-zinc-400 -xs font-mono uppercase tracking-wide mb-3">
+              <AlertTriangle size={15} className="text-amber-400" /> Low Confidence Classification
+            </div>
+            <h3 className="text-2xl md:text-3xl font-semibold leading-snug text-white">
+              Unable to identify the disease
+            </h3>
+            <p className="mt-3 text-sm text-zinc-300 leading-relaxed">
+              {message || 'The uploaded image could not be classified with sufficient confidence.'}
+            </p>
+          </div>
+
+          <div className="flex flex-col items-start md:items-end gap-1 shrink-0">
+            <span className="text-xs uppercase font-mono text-zinc-400 tracking-wide">Confidence</span>
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-4xl md:text-5xl font-semibold font-mono text-white"
+            >
+              {confidence ? `${confidence}%` : 'Uncertain'}
+            </motion.span>
+          </div>
+        </div>
+      </motion.div>
+    )
+  }
+
   const theme = SEVERITY_THEME[severity] || DEFAULT_THEME
 
   return (

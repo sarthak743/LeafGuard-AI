@@ -39,9 +39,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="mt-6 text-lg text-ink/60 max-w-md leading-relaxed"
           >
-            Photograph a leaf and get an instant diagnosis, treatment plan and
-            weather-based risk advisory — grounded in real agronomy, not
-            guesswork.
+            Upload a leaf image and get an AI-powered diagnosis, weather-aware disease risk, practical treatment guidance, and a downloadable PDF report, all in seconds.
           </motion.p>
 
           <motion.div
@@ -149,7 +147,7 @@ export default function Hero() {
               <div className="px-4 py-3.5">
                 <div className="flex items-center gap-1.5 mb-1">
                   <Leaf size={12} className="text-primary" />
-                  <span className="text-xs font-mono uppercase tracking-wide text-ink/50">Peach</span>
+                  <span className="text-xs font-mono uppercase tracking-wide text-ink/50">Tomato</span>
                 </div>
                 <p className="text-sm font-semibold text-ink leading-tight">Bacterial Spot</p>
                 <div className="flex items-center justify-between mt-2.5">

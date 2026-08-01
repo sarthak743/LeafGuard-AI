@@ -16,6 +16,22 @@ export default function WeatherAdvisory({ weather, advisory }) {
 
   if (!weather && !advisory) return null
 
+  const score = advisory?.score ?? 0
+  const progressPercentage =
+    score === 0 ? 0 :
+    score === 1 ? 33 :
+    score === 2 ? 66 :
+    100
+
+  const barColor =
+    score === 1 || advisory?.risk === 'Low'
+      ? 'bg-amber-400'
+      : score === 2 || advisory?.risk === 'Medium'
+      ? 'bg-orange-500'
+      : score === 3 || advisory?.risk === 'High'
+      ? 'bg-red-500'
+      : 'bg-amber-400'
+
   return (
     <Card className="md:col-span-2">
       <div className="flex items-center gap-2 mb-6">
@@ -60,10 +76,10 @@ export default function WeatherAdvisory({ weather, advisory }) {
             <div className="h-2 rounded-full bg-canopy overflow-hidden mb-4">
               <motion.div
                 initial={{ width: 0 }}
-                whileInView={{ width: `${advisory.score}%` }}
+                whileInView={{ width: `${progressPercentage}%` }}
                 viewport={{ once: true }}
-                transition={{ duration: 1 }}
-                className="h-full rounded-full bg-primary"
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className={`h-full rounded-full ${barColor}`}
               />
             </div>
             <p className="text-sm text-ink/70 leading-relaxed mt-auto">{advisory.message}</p>

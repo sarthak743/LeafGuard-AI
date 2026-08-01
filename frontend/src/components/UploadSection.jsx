@@ -259,10 +259,7 @@ export default function UploadSection({ onAnalyze, analyzing }) {
               transition={{ duration: 0.4 }}
               className="mt-16 w-full"
             >
-              <div className="text-center mb-10">
-                <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wide text-primary mb-2">
-                  <Sparkles size={14} /> Quick Test
-                </div>
+              <div className="text-center mb-10">                
                 <h3 className="text-2xl md:text-3xl font-semibold text-ink">Try Sample Images</h3>
                 <p className="text-sm md:text-base text-ink/60 mt-1.5 max-w-md mx-auto leading-relaxed">
                   Don't have a leaf photo? Explore LeafGuard using these sample images.
