@@ -38,10 +38,6 @@ frontend/dist/
 build/
 frontend/build/
 
-# Model Artifacts
-backend/models/*.pth
-backend/models/*.pt
-
 # Dataset
 backend/data/raw/
 backend/data/processed/
