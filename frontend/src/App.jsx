@@ -15,6 +15,7 @@ import { uploadImage } from "./api/prediction.js"
 
 export default function App() {
   const [analyzing, setAnalyzing] = useState(false)
+  const [loadingComplete, setLoadingComplete] = useState(false)
   const [result, setResult] = useState(null)
   const [uploadedImage, setUploadedImage] = useState(null)
   const resultsRef = useRef(null)
@@ -25,11 +26,9 @@ export default function App() {
     console.log('[App] coords:', coords)
 
     setAnalyzing(true)
+    setLoadingComplete(false)
     setResult(null)
     setUploadedImage(preview || null)
-
-    const startTime = Date.now()
-    const MIN_LOADING_TIME = 5000 // Enforce exactly 5.0 second loading duration
 
     let data = null
 
@@ -62,22 +61,23 @@ export default function App() {
       console.log('[App] Fallback weather_advisory object:', data.weather_advisory)
     }
 
-    // Ensure total loading duration is approximately 6.5 seconds for a premium experience
-    const elapsed = Date.now() - startTime
-    const delay = Math.max(0, MIN_LOADING_TIME - elapsed)
+    // Trigger 100% completion fill on progress bar as soon as API response is ready
+    setLoadingComplete(true)
 
+    // Allow 300ms for progress bar to hit 100% smoothly before dismissing modal
     setTimeout(() => {
       setAnalyzing(false)
       setResult(data)
       requestAnimationFrame(() => {
         resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       })
-    }, delay)
+    }, 300)
   }
 
   const handleReset = () => {
     setResult(null)
     setUploadedImage(null)
+    setLoadingComplete(false)
     uploadKey.current += 1
     document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
@@ -95,7 +95,9 @@ export default function App() {
           <VeinDivider />
           <UploadSection key={uploadKey.current} onAnalyze={handleAnalyze} analyzing={analyzing} />
 
-          <AnimatePresence>{analyzing && <LoadingState />}</AnimatePresence>
+          <AnimatePresence>
+            {analyzing && <LoadingState isComplete={loadingComplete} />}
+          </AnimatePresence>
 
           <AnimatePresence>
             {result && (

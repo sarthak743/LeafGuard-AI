@@ -1,13 +1,52 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-export default function LoadingState() {
+export default function LoadingState({ isComplete = false }) {
+  const [progress, setProgress] = useState(0)
+
   useEffect(() => {
     document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = ''
     }
   }, [])
+
+  useEffect(() => {
+    if (isComplete) {
+      setProgress(100)
+      return
+    }
+
+    const startTime = Date.now()
+
+    const calculateProgress = (elapsedSeconds) => {
+      const s = elapsedSeconds
+      if (s <= 2) {
+        // 0s -> 2s: 0% -> 35%
+        return (s / 2) * 35
+      } else if (s <= 5) {
+        // 2s -> 5s: 35% -> 70%
+        return 35 + ((s - 2) / 3) * 35
+      } else if (s <= 8) {
+        // 5s -> 8s: 70% -> 90%
+        return 70 + ((s - 5) / 3) * 20
+      } else if (s <= 10) {
+        // 8s -> 10s: 90% -> 98%
+        return 90 + ((s - 8) / 2) * 8
+      } else {
+        // > 10s: stay around 98% until API response completes
+        return 98
+      }
+    }
+
+    const interval = setInterval(() => {
+      const elapsedSeconds = (Date.now() - startTime) / 1000
+      const targetProgress = calculateProgress(elapsedSeconds)
+      setProgress((prev) => Math.max(prev, Math.min(98, targetProgress)))
+    }, 50)
+
+    return () => clearInterval(interval)
+  }, [isComplete])
 
   return (
     <motion.div
@@ -32,7 +71,7 @@ export default function LoadingState() {
         <div className="relative h-16 w-16 mb-8 flex items-center justify-center">
           <motion.div
             animate={{ rotate: 360 }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
             className="h-full w-full relative"
           >
             {[...Array(12)].map((_, i) => (
@@ -54,13 +93,15 @@ export default function LoadingState() {
           Our AI is analyzing your leaf and preparing your diagnosis.
         </p>
 
-        {/* Progress bar: synchronized to hit 100% at exactly 5 seconds */}
+        {/* Dynamic AI-styled Progress Bar */}
         <div className="mt-8 w-full h-1.5 rounded-full bg-canopy overflow-hidden">
           <motion.div
             className="h-full bg-gradient-to-r from-secondary to-primary rounded-full"
-            initial={{ width: '0%' }}
-            animate={{ width: '100%' }}
-            transition={{ duration: 5, ease: 'linear' }}
+            animate={{ width: `${progress}%` }}
+            transition={{
+              duration: isComplete ? 0.25 : 0.1,
+              ease: isComplete ? 'easeOut' : 'linear',
+            }}
           />
         </div>
       </motion.div>
