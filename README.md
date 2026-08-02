@@ -1,6 +1,6 @@
 # LeafGuard
 
-![LeafGuard Banner](post/Screenshot%202026-08-01%20225005.png.png)
+![LeafGuard Banner](frontend/public/Screenshot%202026-08-01%20225005.png)
 
 LeafGuard is an AI-powered web application that helps identify plant diseases from leaf images. Users can upload a photo of a plant leaf and receive an instant diagnosis, confidence score, weather-based disease risk assessment, treatment recommendations, and a downloadable PDF report.
 
